@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STFN strona domowa</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: black;
+            color: white
+        }
+
+        ul {
+            list-style-type: None;
+        }
+
+        .entry {
+            margin-bottom: 30px;
+        }
+
+        .text {
+            font-size: 1.1em;
+        }
+
+        .author {
+            font-size: 2em;
+        }
+
+        .link {
+            color: white;
+            font-size: 0.4em;
+        }
+
+        .subtext {
+            color: white;
+            font-size: 0.6em;
+        }
+
+        .header {
+            margin: auto;
+            font-size: 3em;
+            text-align: center;
+        }
+
+        img {
+            width: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <img src="{% static 'guests/gg.png' %}" alt="My image">
+        Witaj na mojej stronie internetowy wędrowcze, jestem <a href="http://twitter.com/stfn">STFN</a>.
+        <img src="{% static 'guests/cons.gif' %}" alt="My image">
+        <br />
+        <span class="subtext">jesteś {{guest_number}} gościem na tej stronie</span>
+        <br />
+        <a class="link" href="{% url 'add' %}">Wpisz się do księgi gości</a>
+    </div>
+    <ul>
+        {% for entry in object_list %}
+        <div class="entry">
+            <li><span class="author">{{ entry.author }}</span> <br /><span class="text">{{ entry.text }}</span></li>
+        </div>
+        {% empty %}
+        <li>No entries yet.</li>
+        {% endfor %}
+    </ul>
+    <hr>
+    Pierwsza wersja tej strony: <a style="color:white" href="{%static 'guests/first.png'%}">klik</a>
+    <hr>
+    (c) 2021. Webmaster: stfn
+</body>
+
+</html>
