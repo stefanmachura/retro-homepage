@@ -4,6 +4,7 @@ from guests.models import Entry
 from stats.models import SiteStats
 
 class IndexView(generic.ListView):
+    paginate_by = 15
     template_name = 'guests/index.html'
 
     def get_queryset(self):
@@ -21,7 +22,7 @@ class IndexView(generic.ListView):
 
 class NewEntryView(generic.CreateView):
     model = Entry
-    fields = ["author", "text"]
+    fields = ["author","pronouns", "text"]
     template_name = 'guests/new.html'
 
     def get_success_url(self):

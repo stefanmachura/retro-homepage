@@ -30,11 +30,12 @@
             font-size: 2em;
         }
 
-        .link {
+        a {
             color: white;
+        }
+        .add-entry-link {
             font-size: 0.4em;
         }
-
         .subtext {
             color: white;
             font-size: 0.6em;
@@ -49,6 +50,9 @@
         img {
             width: 100px;
         }
+        .footer {
+            margin-top:3em
+        }
     </style>
 </head>
 
@@ -60,21 +64,38 @@
         <br />
         <span class="subtext">jesteś {{guest_number}} gościem na tej stronie</span>
         <br />
-        <a class="link" href="{% url 'add' %}">Wpisz się do księgi gości</a>
+        <a class="add-entry-link" href="{% url 'add' %}">Wpisz się do księgi gości</a>
     </div>
     <ul>
         {% for entry in object_list %}
         <div class="entry">
-            <li><span class="author">{{ entry.author }}</span> <br /><span class="text">{{ entry.text }}</span></li>
+            <li><span class="author">{{ entry.author }}</span> <span class="pronouns">{{ entry.pronouns|default_if_none:"" }}</span> <br /><span class="text">{{ entry.text }}</span></li>
         </div>
         {% empty %}
         <li>No entries yet.</li>
         {% endfor %}
     </ul>
-    <hr>
-    Pierwsza wersja tej strony: <a style="color:white" href="{%static 'guests/first.png'%}">klik</a>
-    <hr>
-    (c) 2021. Webmaster: stfn
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    <div class="footer">
+        <hr>
+        Pierwsza wersja tej strony: <a style="color:white" href="{%static 'guests/first.png'%}">klik</a> (c) 2021. Webmaster: stfn
+    </div>
 </body>
 
 </html>
