@@ -5,10 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: black;
+            color: white
+        }
+        .form-input {
+            margin:1em
+        }
+    </style>
 </head>
 <body>
     <form method="post">{% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-input"><label for="{{ form.author.id_for_label }}">imię/pseudonim</label> {{form.author}}</div>
+        <div class="form-input"><label for="{{ form.pronouns.id_for_label }}">zaimki</label> {{form.pronouns}}</div>
+        <div class="form-input"><label for="{{ form.text.id_for_label }}">tekst</label><br/>{{form.text}}</div>
         <input type="submit" value="Add New">
     </form>
 </body>

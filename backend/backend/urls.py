@@ -1,6 +1,3 @@
-
 from django.urls import path, include
 
-urlpatterns = [
-    path("", include("guests.urls"))
-]
+urlpatterns = [path("", include("guests.urls"))]

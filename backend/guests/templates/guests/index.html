@@ -26,8 +26,9 @@
             font-size: 1.1em;
         }
 
-        .author {
-            font-size: 2em;
+        .entry-header {
+            font-size: 0.9em;
+            color: #CCC;
         }
 
         a {
@@ -69,7 +70,7 @@
     <ul>
         {% for entry in object_list %}
         <div class="entry">
-            <li><span class="author">{{ entry.author }}</span> <span class="pronouns">{{ entry.pronouns|default_if_none:"" }}</span> <br /><span class="text">{{ entry.text }}</span></li>
+            <li><span class="entry-header">{{ entry.author }} ({{ entry.pronouns|default_if_none:"" }}) {{ entry.added_at}}</span> <br /><span class="text">{{ entry.text }}</span></li>
         </div>
         {% empty %}
         <li>No entries yet.</li>
@@ -78,17 +79,17 @@
     <div class="pagination">
         <span class="step-links">
             {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; first</a>
-                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                <a href="?page=1">&laquo; pierwsza</a>
+                <a href="?page={{ page_obj.previous_page_number }}">poprzednia</a>
             {% endif %}
     
             <span class="current">
-                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
             </span>
     
             {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">next</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                <a href="?page={{ page_obj.next_page_number }}">kolejna</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">ostatnia &raquo;</a>
             {% endif %}
         </span>
     </div>
